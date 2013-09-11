@@ -42,6 +42,14 @@ module Projenitor::Template
       handler = FileHandler[ File.extname(template_file) ]
 
       handler.process(self, locals)
+
+      chmod options[:chmod]
+    end
+
+    def chmod(mod)
+      return if mod.nil?
+
+      FileUtils.chmod mod, absolute_path
     end
 
     def dir
