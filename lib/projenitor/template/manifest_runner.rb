@@ -63,7 +63,7 @@ module Projenitor::Template
       file_mapping.build(options)
     end
 
-    def local_name
+    def project
       mapper.project_name
     end
 

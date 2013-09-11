@@ -9,11 +9,11 @@ file "Rakefile", "Rakefile"
 
 file "Gemfile", "Gemfile"
 
-directory "lib/#{local_name}"
+directory "lib/#{project}"
 
-file "lib/#{local_name}.rb", "project_root.rb.erb"
+file "lib/#{project}.rb", "project_root.rb.erb"
 
-directory "spec/#{local_name}"
+directory "spec/#{project}"
 
 file "spec/spec_helper.rb", "spec_helper.rb"
 
@@ -21,7 +21,7 @@ if options["files"]
   options["files"].split(',').each do |filename|
     locals = { class_name: filename.classify }
 
-    file "lib/#{local_name}/#{filename}.rb",       "library_file.rb.erb", locals: locals
-    file "spec/#{local_name}/#{filename}_spec.rb", "test_file.rb.erb",    locals: locals
+    file "lib/#{project}/#{filename}.rb",       "library_file.rb.erb", locals: locals
+    file "spec/#{project}/#{filename}_spec.rb", "test_file.rb.erb",    locals: locals
   end
 end
