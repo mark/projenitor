@@ -18,7 +18,7 @@ class LinkCommand
   
   def initialize(path)
     @path      = File.expand_path(path)
-    @link_path = Dotfile.template_path(path)
+    @link_path = Projenitor::Dotfile.template_path(path)
   end
 
   #################
@@ -68,7 +68,7 @@ class LinkCommand
   end
 
   def dotfile_exists?
-    Dotfile.build_dotfile_dir
+    Projenitor::Dotfile.build_dotfile_dir
   end
 
   def manifest_exists?
