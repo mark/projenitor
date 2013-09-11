@@ -1,0 +1,10 @@
+# Cinch bot configs
+bot:
+  server: irc.freenode.net
+  nick: <%= project %>-bot
+  channels:
+  - '#<%= project %>'
+  plugins:
+    prefix:
+    plugins:
+    - <%= project.classify %>::Plugin

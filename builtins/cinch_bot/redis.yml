@@ -1,0 +1,6 @@
+# Redis config
+redis:
+  :host: YOUR REDIS HOST HERE
+  :password: YOUR REDIS PASSWORD HERE
+  :port: YOUR REDIS PORT HERE
+  :db: 0
