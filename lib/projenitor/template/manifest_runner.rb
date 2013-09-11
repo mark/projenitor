@@ -18,7 +18,7 @@ module Projenitor::Template
     
     def initialize(root_path, template_name, options)
       @options = options
-      @mapper  = ProjectMapper.new(template_name, root_path)
+      @mapper  = Project.new(template_name, root_path)
     end
 
     #################

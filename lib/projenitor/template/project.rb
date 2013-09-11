@@ -1,6 +1,6 @@
 module Projenitor::Template
 
-  class ProjectMapper
+  class Project
 
     ################
     #              #
