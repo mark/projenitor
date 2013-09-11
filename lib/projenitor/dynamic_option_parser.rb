@@ -6,7 +6,9 @@ module DynamicOptionParser
 
   def self.parse(options)
     Hash.new.tap do |hash|
-      parse_option(hash, options) until options.empty?
+      while options.any?
+        parse_option(hash, options)
+      end
     end
   end
 
@@ -19,7 +21,7 @@ module DynamicOptionParser
       key   = $1
       value = options.shift
       
-      if value =~ FLAG
+      if value.nil? || value =~ FLAG
         options.unshift(value)
         value = true
       end
