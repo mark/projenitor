@@ -41,15 +41,10 @@ class BuildCommand
   ####################
   
   def run
-    puts "Template = #{ template }"
-    puts "Path     = #{ path     }"
-    puts "Options  = #{ options.inspect }"
-
-    klass   = Template.create_template_class(template)
+    klass   = Projenitor::Template::ManifestRunner.create_template_class(template)
     builder = klass.new(path, template, options)
 
-    builder.setup!
-    builder.build!
+    builder.build
   end
 
 end

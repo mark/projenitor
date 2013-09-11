@@ -1,6 +1,8 @@
 require 'spec_helper'
 
-describe <%= filename.classify %> do
+include <%= project.classify %>
+
+describe <%= class_name %> do
 
   it "must be true" do
     true.must_equal true
