@@ -3,7 +3,7 @@
 #  that live on heroku and use redis
 #
 
-redis = options['no-redis']
+redis = ! options['no-redis']
 
 file "Procfile", "Procfile"
 
