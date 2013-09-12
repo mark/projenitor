@@ -8,11 +8,7 @@ module Projenitor
       Projenitor::Commands::LinkCommand.execute(path)
     end
 
-    desc *Projenitor::Commands::CloneCommand.desc
-
-    def clone(path)
-      Projenitor::Commands::CloneCommand.execute(path)
-    end
+    Commands::CloneCommand[self]
 
     Dotfile.templates.each do |template|
 
