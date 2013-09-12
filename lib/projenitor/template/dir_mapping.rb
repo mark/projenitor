@@ -8,7 +8,7 @@ module Projenitor::Template
     #              #
     ################
 
-    attr_reader :mapper, :local_path
+    attr_reader :project, :local_path
 
     ###############
     #             #
@@ -16,8 +16,8 @@ module Projenitor::Template
     #             #
     ###############
     
-    def initialize(mapper, local_path)
-      @mapper     = mapper
+    def initialize(project, local_path)
+      @project    = project
       @local_path = local_path
     end
 
@@ -28,7 +28,7 @@ module Projenitor::Template
     ####################
 
     def absolute_path
-      @absolute_path ||= mapper.absolute_path(local_path)
+      @absolute_path ||= project.absolute_path(local_path)
     end
 
     def exists?

@@ -8,7 +8,7 @@ module Projenitor::Template
     #              #
     ################
 
-    attr_reader :mapper, :template_file, :local_path
+    attr_reader :project, :template_file, :local_path
 
     ###############
     #             #
@@ -16,8 +16,8 @@ module Projenitor::Template
     #             #
     ###############
     
-    def initialize(mapper, template_file, local_path)
-      @mapper        = mapper
+    def initialize(project, template_file, local_path)
+      @project       = project
       @template_file = template_file
       @local_path    = local_path
     end
@@ -29,7 +29,7 @@ module Projenitor::Template
     ####################
 
     def absolute_path
-      @absolute_path ||= mapper.absolute_path(local_path)
+      @absolute_path ||= project.absolute_path(local_path)
     end
 
     def build(options = {})
@@ -51,7 +51,7 @@ module Projenitor::Template
     end
 
     def dir
-      mapper.dir File.dirname(local_path)
+      project.dir File.dirname(local_path)
     end
 
     def exists?
@@ -67,11 +67,11 @@ module Projenitor::Template
     end
 
     def local_options
-      { project: mapper.project_name, filename: filename }
+      { project: project.project_name, filename: filename }
     end
 
     def template_path
-      @template_path ||= mapper.template_path(template_file)
+      @template_path ||= project.template_path(template_file)
     end
 
     def read_from_template
