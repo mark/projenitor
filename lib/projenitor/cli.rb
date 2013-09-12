@@ -8,6 +8,12 @@ module Projenitor
       LinkCommand.execute(path)
     end
 
+    desc *Projenitor::Commands::CloneCommand.desc
+
+    def clone(path)
+      Projenitor::Commands::CloneCommand.execute(path)
+    end
+
     Dotfile.templates.each do |template|
 
       desc "#{ template } COMMAND", "Commands for the #{ template } generator"
