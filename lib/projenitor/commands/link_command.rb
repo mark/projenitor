@@ -4,11 +4,11 @@ module Projenitor::Commands
 
   class LinkCommand < BaseCommand
 
-    command         :link
+    command     :link
 
-    command_summary "link PATH"
+    usage       "link PATH"
 
-    description     "Links the directory at PATH as a new projenitor template"
+    description "Links the directory at PATH as a new projenitor template"
     
     ################
     #              #

@@ -13,7 +13,7 @@ module Projenitor::Commands
       attr_reader :template_name
 
       def create_command_class(template_name)
-        Class.new(TemplateCommand) do
+        Class.new(Thor) do
           @template_name = template_name
 
           #################

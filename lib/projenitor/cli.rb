@@ -10,7 +10,9 @@ module Projenitor
 
       desc "#{ template } COMMAND", "Commands for the #{ template } generator"
       
-      subcommand template, Projenitor::Commands::TemplateCommand.create_command_class(template)
+      klass = Commands::TemplateCommandFactory.template_command(template)
+
+      subcommand template, klass
     
     end
 

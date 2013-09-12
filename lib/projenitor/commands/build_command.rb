@@ -1,7 +1,17 @@
 module Projenitor::Commands
 
-  class BuildCommand
+  class BuildCommand < BaseCommand
 
+    dynamic { |template_name|
+
+      command     :build
+
+      usage       "build PATH"
+
+      description "Build a new #{ template_name } project at PATH"
+
+    }
+    
     ################
     #              #
     # Declarations #
@@ -20,20 +30,6 @@ module Projenitor::Commands
       @template = template
       @path     = path
       @options  = DynamicOptionParser.parse(args)
-    end
-
-    #################
-    #               #
-    # Class Methods #
-    #               #
-    #################
-    
-    def self.desc(template_name)
-      ["build PATH", "Build a new #{ template_name } project at PATH"]
-    end
-
-    def self.execute(*args)
-      new(*args).run
     end
 
     ####################

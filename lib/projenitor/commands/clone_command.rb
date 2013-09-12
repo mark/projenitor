@@ -2,11 +2,11 @@ module Projenitor::Commands
 
   class CloneCommand < BaseCommand
 
-    command         :clone
+    command     :clone
 
-    command_summary "clone PATH"
+    usage       "clone PATH"
 
-    description     "Copies directory or .zip at PATH into ~/.projenitor as a new projenitor template"
+    description "Copies directory or .zip at PATH into ~/.projenitor as a new projenitor template"
     
     ################
     #              #
