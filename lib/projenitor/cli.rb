@@ -2,10 +2,10 @@ module Projenitor
 
   class CLI < Thor
 
-    desc *LinkCommand.desc
+    desc *Projenitor::Commands::LinkCommand.desc
 
     def link(path)
-      LinkCommand.execute(path)
+      Projenitor::Commands::LinkCommand.execute(path)
     end
 
     desc *Projenitor::Commands::CloneCommand.desc
@@ -18,7 +18,7 @@ module Projenitor
 
       desc "#{ template } COMMAND", "Commands for the #{ template } generator"
       
-      subcommand template, TemplateCommand.create_command_class(template)
+      subcommand template, Projenitor::Commands::TemplateCommand.create_command_class(template)
     
     end
 

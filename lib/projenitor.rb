@@ -9,9 +9,10 @@ require 'projenitor/template/file_mapping'
 require 'projenitor/template/dir_mapping'
 require 'projenitor/template/registry'
 
-require 'projenitor/build_command'
-require 'projenitor/link_command'
-require 'projenitor/template_command'
+require 'projenitor/commands/build_command'
+require 'projenitor/commands/clone_command'
+require 'projenitor/commands/link_command'
+require 'projenitor/commands/template_command'
 
 require 'projenitor/cli'
 
