@@ -2,12 +2,8 @@ module Projenitor
 
   class CLI < Thor
 
-    desc *Projenitor::Commands::LinkCommand.desc
-
-    def link(path)
-      Projenitor::Commands::LinkCommand.execute(path)
-    end
-
+    Commands::LinkCommand[self]
+    
     Commands::CloneCommand[self]
 
     Dotfile.templates.each do |template|

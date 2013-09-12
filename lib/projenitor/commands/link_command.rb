@@ -2,8 +2,14 @@ require 'fileutils'
 
 module Projenitor::Commands
 
-  class LinkCommand
+  class LinkCommand < BaseCommand
 
+    command         :link
+
+    command_summary "link PATH"
+
+    description     "Links the directory at PATH as a new projenitor template"
+    
     ################
     #              #
     # Declarations #
@@ -21,20 +27,6 @@ module Projenitor::Commands
     def initialize(path)
       @path      = File.expand_path(path)
       @link_path = Projenitor::Dotfile.template_path(path)
-    end
-
-    #################
-    #               #
-    # Class Methods #
-    #               #
-    #################
-    
-    def self.desc
-      ["link PATH", "Links the directory at PATH as a new projenitor template"]
-    end
-
-    def self.execute(*args)
-      new(*args).run
     end
 
     ####################
