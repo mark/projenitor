@@ -32,9 +32,8 @@ module Projenitor::Template
       @absolute_path ||= mapper.absolute_path(local_path)
     end
 
-    def build(options = {})            
-
-      puts "CREATE: #{ absolute_path }"
+    def build(options = {})
+      puts "\tCREATE\t#{ absolute_path }"
 
       locals  = options.fetch(:locals) { Hash.new }
       locals  = locals.merge local_options
