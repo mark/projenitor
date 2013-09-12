@@ -41,10 +41,7 @@ class BuildCommand
   ####################
   
   def run
-    klass   = Projenitor::Template::ManifestRunner.create_template_class(template)
-    builder = klass.new(path, template, options)
-
-    builder.build
+    Projenitor::Template::Project.build(template, path, options)
   end
 
 end

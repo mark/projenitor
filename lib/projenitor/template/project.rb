@@ -21,6 +21,19 @@ module Projenitor::Template
       @local_root    = local_root
     end
 
+    #################
+    #               #
+    # Class Methods #
+    #               #
+    #################
+    
+    def build(template, path, options)
+      klass   = ManifestRunner.create_template_class(template)
+      builder = klass.new(path, template, options)
+
+      builder.build
+    end
+
     ####################
     #                  #
     # Instance Methods #
