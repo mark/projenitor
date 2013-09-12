@@ -8,7 +8,7 @@ module Projenitor::Template
     #              #
     ################
     
-    attr_reader :mapper, :options
+    attr_reader :__project__, :options, :__registry__
 
     ###############
     #             #
@@ -17,8 +17,9 @@ module Projenitor::Template
     ###############
     
     def initialize(root_path, template_name, options)
-      @options = options
-      @mapper  = Project.new(template_name, root_path)
+      @options      = options
+      @__project__  = Project.new(template_name, root_path)
+      @__registry__ = Registry.new
     end
 
     #################
@@ -40,6 +41,7 @@ module Projenitor::Template
           def build
             directory('.')
             #{ manifest_contents }
+            __registry__.build
           end
         RUBY
       end
@@ -52,19 +54,20 @@ module Projenitor::Template
     ####################
 
     def directory(local_path, options = {})
-      dir_mapping = mapper.dir(local_path)
+      dir_mapping = __project__.dir(local_path)
 
-      dir_mapping.build(options)
+      __registry__.register(dir_mapping, options)
     end
 
     def file(local_path, template_file, options = {})
-      file_mapping = mapper.file(template_file, local_path)
+      file_mapping = __project__.file(template_file, local_path)
 
-      file_mapping.build(options)
+      __registry__.register(file_mapping, options)
+      __registry__.dependency(file_mapping.dir)
     end
 
     def project
-      mapper.project_name
+      __project__.project_name
     end
 
   end

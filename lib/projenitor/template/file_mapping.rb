@@ -33,7 +33,6 @@ module Projenitor::Template
     end
 
     def build(options = {})            
-      dir.build
 
       puts "CREATE: #{ absolute_path }"
 
