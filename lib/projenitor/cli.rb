@@ -8,11 +8,7 @@ module Projenitor
 
     Dotfile.templates.each do |template|
 
-      desc "#{ template } COMMAND", "Commands for the #{ template } generator"
-      
-      klass = Commands::TemplateCommandFactory.template_command(template)
-
-      subcommand template, klass
+      Commands::TemplateCommandFactory[self, template]
     
     end
 

@@ -8,7 +8,13 @@ module Projenitor::Commands
     #                #
     ##################
     
-    def self.template_command(template)
+    def self.[](cli, template)
+      cli.desc "#{ template } COMMAND", "Commands for #{ template } project template"
+
+      cli.subcommand template, factory(template)
+    end
+
+    def self.factory(template)
       klass = Class.new(Thor) do
 
         def self.template_name(template = nil)
