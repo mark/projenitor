@@ -27,7 +27,7 @@ module Projenitor::Template
     #               #
     #################
     
-    def build(template, path, options)
+    def self.build(template, path, options)
       klass   = ManifestRunner.create_template_class(template)
       builder = klass.new(path, template, options)
 
