@@ -16,24 +16,15 @@ module Projenitor::Commands
     
     attr_reader :path, :link_path
 
-    ###############
-    #             #
-    # Constructor #
-    #             #
-    ###############
-    
-    def initialize(path)
-      @path      = File.expand_path(path)
-      @link_path = Projenitor::Dotfile.template_path(path)
-    end
-
     ####################
     #                  #
     # Instance Methods #
     #                  #
     ####################
     
-    def run
+    def run(path)
+      @path      = File.expand_path(path)
+      @link_path = Projenitor::Dotfile.template_path(path)
     end
 
   end

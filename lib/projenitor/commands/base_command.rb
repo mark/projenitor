@@ -9,37 +9,25 @@ module Projenitor::Commands
     #################
     
     def self.[](cli, *args)
-      if @dynamic
-        dynamic_definition = CommandDefinition.new(self)
-        dynamic_definition.dynamic(@dynamic)
-        dynamic_definition.define_on(cli, *args)
-      else
-        defn.define_on(cli, *args)
-      end
+      command = self.new(*args)
+      
+      command.define_on(cli)
     end
 
     def self.command(cmd)
-      defn.command cmd
-    end
-
-    def self.defn
-      @defn ||= CommandDefinition.new(self)
-    end
-
-    def self.dynamic(&block)
-      @dynamic = block
+      define_method(:command) { cmd }
     end
 
     def self.description(short)
-      defn.description short
+      define_method(:description) { short }
     end
 
     def self.long_description(long)
-      defn.long_description long
+      define_method(:long_description) { long }
     end
 
     def self.usage(summary)
-      defn.usage summary
+      define_method(:usage) { summary }
     end
     
     ####################
@@ -48,8 +36,32 @@ module Projenitor::Commands
     #                  #
     ####################
     
+    def command
+      raise NotImplementedError
+    end
+
+    def define_on(cli)
+      command_object = self
+
+      cli.desc(usage, description)
+      cli.long_desc(long_description) unless long_description.empty?
+      cli.send(:define_method, command) { |*command_args| command_object.run(*command_args) }
+    end
+
+    def description
+      ''
+    end
+
+    def long_description
+      ''
+    end
+
     def run
       raise NotImplementedError
+    end
+
+    def usage
+      ''
     end
 
   end

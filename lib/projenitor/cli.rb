@@ -8,7 +8,7 @@ module Projenitor
 
     Dotfile.templates.each do |template|
 
-      Commands::TemplateCommandFactory[self, template]
+      Commands::TemplateCommand[self, template]
     
     end
 
