@@ -4,7 +4,7 @@ module Projenitor::Commands
 
     command     :build
 
-    usage       "build PATH"
+    usage       "build PATH"  
 
     ################
     #              #
@@ -34,7 +34,7 @@ module Projenitor::Commands
       "Build a new #{ template } project at PATH"
     end
 
-    def run(*args)
+    def run(path, *args)
       @path     = path
       @options  = DynamicOptionParser.parse(args)
 

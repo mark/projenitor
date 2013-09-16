@@ -36,8 +36,12 @@ module Projenitor::Commands
     #                  #
     ####################
     
-    def command
-      raise NotImplementedError
+    def command_arguments
+      meth       = self.class.instance_method(:run)
+      params     = meth.parameters.map { |param| param.last }
+      params[-1] = '*args' if params[-1] == :args
+
+      params.join(', ')
     end
 
     def define_on(cli)
@@ -45,7 +49,19 @@ module Projenitor::Commands
 
       cli.desc(usage, description)
       cli.long_desc(long_description) unless long_description.empty?
-      cli.send(:define_method, command) { |*command_args| command_object.run(*command_args) }
+
+      cli.instance_variable_set "@__#{command}__", self
+
+      cli.class_eval <<-RUBY
+        def self.__#{ command }__
+          @__#{ command }__
+        end
+
+        def #{ command }(#{ command_arguments })
+          self.class.__#{ command }__.run(#{ command_arguments })
+        end
+      RUBY
+
     end
 
     def description
