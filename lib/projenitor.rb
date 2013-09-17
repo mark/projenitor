@@ -18,3 +18,14 @@ require 'projenitor/commands/link_command'
 require 'projenitor/commands/template_command'
 
 require 'projenitor/cli'
+require 'projenitor/reporter'
+
+module Projenitor
+
+  class << self
+    attr_accessor :reporter
+  end
+
+  self.reporter = Reporter.new
+
+end
