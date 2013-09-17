@@ -33,8 +33,6 @@ module Projenitor::Template
     end
 
     def build(options = {})
-      puts "\tCREATE\t#{ absolute_path }"
-
       locals  = options.fetch(:locals) { Hash.new }
       locals  = locals.merge local_options
       handler = FileHandler[ File.extname(template_file) ]
@@ -66,6 +64,37 @@ module Projenitor::Template
       File.basename(local_path, ext)
     end
 
+    def handle_exists(current_contents, new_contents)
+      if project.skip?
+        Projenitor.reporter.report(:skip, absolute_path)
+      elsif project.force?
+        Projenitor.reporter.report(:replace, absolute_path)
+        write(new_contents)
+      else
+        Projenitor.reporter.report(:exists, absolute_path)
+        done = false
+
+        until done
+          print "\t  [R]eplace, [S]kip, [D]iff, [Q]uit? "
+          input = STDIN.gets.chomp[0].to_s.downcase
+
+          case input
+          when 'r'
+            Projenitor.reporter.report(:replace, absolute_path)
+            write(new_contents)
+            done = true
+          when 's'
+            Projenitor.reporter.report(:skip, absolute_path)
+            done = true
+          when 'd'
+            puts Diffy::Diff.new(current_contents, new_contents)
+          when 'q'
+            exit
+          end
+        end
+      end
+    end
+
     def local_options
       { project: project.project_name, filename: filename }
     end
@@ -79,6 +108,22 @@ module Projenitor::Template
     end
 
     def write_to_project(string)
+      if File.exists?(absolute_path)
+        current_contents = File.read(absolute_path)
+        if current_contents == string
+          Projenitor.reporter.report(:identical, absolute_path)
+        else
+          handle_exists(current_contents, string)
+        end
+      else
+        Projenitor.reporter.report(:create, absolute_path)
+        write(string)
+      end
+    end
+
+    private
+
+    def write(string)
       File.write(absolute_path, string)
     end
 

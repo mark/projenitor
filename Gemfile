@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rake'
 gem 'thor'
 gem 'activesupport'
+gem 'diffy'
 
 group :test do
   gem 'minitest',  require: false
