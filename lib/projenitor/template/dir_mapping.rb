@@ -37,12 +37,12 @@ module Projenitor::Template
 
     def build(options = {})
       if File.directory?(absolute_path)
-        puts "\tEXISTS\t#{ absolute_path }"
+        Projenitor.reporter.report(:exists, absolute_path)
       elsif File.exists?(absolute_path)
-        puts "\tERROR\t#{ absolute_path } exists and is not a directory"
+        Projenitor.reporter.report(:error, absolute_path)
         exit
       else
-        puts "\tCREATE\t#{ absolute_path }"
+        Projenitor.reporter.report(:create, absolute_path)
         FileUtils.makedirs(absolute_path)
       end
     end
