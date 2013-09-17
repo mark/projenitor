@@ -8,7 +8,7 @@ module Projenitor::Template
     #              #
     ################
 
-    attr_reader :template_name, :local_root
+    attr_reader :template_name, :local_root, :options
 
     ###############
     #             #
@@ -16,9 +16,10 @@ module Projenitor::Template
     #             #
     ###############
     
-    def initialize(template_name, local_root)
+    def initialize(template_name, local_root, options = {})
       @template_name = template_name
       @local_root    = local_root
+      @options       = options
     end
 
     #################
@@ -56,8 +57,16 @@ module Projenitor::Template
       FileMapping.new(self, template_file, local_path)
     end
 
+    def force?
+      options[:force]
+    end
+
     def project_name
       File.basename(local_root)
+    end
+
+    def skip?
+      options[:skip]
     end
 
     def template_path(template_file)

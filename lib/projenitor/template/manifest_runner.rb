@@ -17,9 +17,11 @@ module Projenitor::Template
     ###############
     
     def initialize(root_path, template_name, options)
-      @options      = options
-      @__project__  = Project.new(template_name, root_path)
-      @__registry__ = Registry.new
+      @options        = options
+      project_options = { skip: options.delete('skip'), force: options.delete('force') }
+
+      @__project__    = Project.new(template_name, root_path, project_options)
+      @__registry__   = Registry.new
     end
 
     #################
