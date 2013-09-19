@@ -44,6 +44,10 @@ module Projenitor::Commands
 
     def define_subcommands(cli)
       BuildCommand[cli, template.name]
+
+      if template.commands_file
+        cli.class_eval(template.commands_file)
+      end
     end
     
     def define_on(cli)
