@@ -1,4 +1,4 @@
-module Projenitor::Template
+class Projenitor::Template
 
   class ManifestRunner
 

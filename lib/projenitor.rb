@@ -3,6 +3,7 @@ require 'active_support/core_ext/string/inflections'
 require 'projenitor/dotfile'
 require 'projenitor/dynamic_option_parser'
 
+require 'projenitor/template/template'
 require 'projenitor/template/manifest_runner'
 require 'projenitor/template/file_handler'
 require 'projenitor/template/erb_runner'

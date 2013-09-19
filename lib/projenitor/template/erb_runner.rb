@@ -1,6 +1,6 @@
 require 'erb'
 
-module Projenitor::Template
+class Projenitor::Template
 
   class ErbRunner
 
