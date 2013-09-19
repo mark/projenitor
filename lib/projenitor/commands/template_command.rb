@@ -16,8 +16,8 @@ module Projenitor::Commands
     #             #
     ###############
     
-    def initialize(template)
-      @template = template
+    def initialize(template_name)
+      @template = Projenitor::Dotfile[template_name]
     end
 
     #################
@@ -39,15 +39,15 @@ module Projenitor::Commands
     ####################
 
     def command
-      template
+      template.name
     end
 
     def define_subcommands(cli)
-      BuildCommand[cli, template]
+      BuildCommand[cli, template.name]
     end
     
     def define_on(cli)
-      sub_cli = self.class.generate_cli(template)
+      sub_cli = self.class.generate_cli(template.name)
       define_subcommands(sub_cli)
 
       cli.desc(usage, description)
@@ -57,11 +57,11 @@ module Projenitor::Commands
     end
 
     def description
-      "Commands for projects using the #{ template } template"
+      "Commands for projects using the #{ template.name } template"
     end
     
     def usage
-      "#{ template } SUBCOMMAND ...ARGS"
+      "#{ template.name } SUBCOMMAND ...ARGS"
     end
 
   end
