@@ -1,3 +1,11 @@
+require 'projenitor/template/manifest_runner'
+require 'projenitor/template/file_handler'
+require 'projenitor/template/erb_runner'
+require 'projenitor/template/project'
+require 'projenitor/template/file_mapping'
+require 'projenitor/template/dir_mapping'
+require 'projenitor/template/registry'
+
 module Projenitor
 
   class Template
