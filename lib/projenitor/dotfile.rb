@@ -36,6 +36,10 @@ module Projenitor
       template_paths.map { |template_path| File.basename(template_path) }
     end
 
+    def self.[](template_name)
+      Template.new(template_name, template_path(template_name))
+    end
+
   end
 
 end
