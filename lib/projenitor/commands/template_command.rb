@@ -42,6 +42,18 @@ module Projenitor::Commands
       template.name
     end
 
+    def define_base_methods(cli)
+      template_obj = template
+
+      cli.class_eval {
+        no_commands {
+          define_method(:template) do
+            template_obj
+          end
+        }
+      }
+    end
+
     def define_subcommands(cli)
       BuildCommand[cli, template.name]
 
@@ -52,6 +64,7 @@ module Projenitor::Commands
     
     def define_on(cli)
       sub_cli = self.class.generate_cli(template.name)
+      define_base_methods(sub_cli)
       define_subcommands(sub_cli)
 
       cli.desc(usage, description)

@@ -1,9 +1,12 @@
 #!/usr/bin/env ruby
+
 require 'bundler/setup'
 Bundler.require(:default)
 
 $:.unshift 'lib'
 
 require 'projenitor'
+require 'irb'
+require 'irb/completion'
 
-Projenitor::CLI.start(ARGV)
+IRB.start

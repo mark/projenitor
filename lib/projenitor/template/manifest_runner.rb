@@ -55,6 +55,13 @@ class Projenitor::Template
     #                  #
     ####################
 
+    def create(local_path, options = {})
+      generated_file = GeneratedFile.new(__project__, local_path)
+      yield(generated_file)
+
+      __registry__.register(generated_file, options)
+    end
+
     def directory(local_path, options = {})
       dir_mapping = __project__.dir(local_path)
 
@@ -66,6 +73,14 @@ class Projenitor::Template
 
       __registry__.register(file_mapping, options)
       __registry__.dependency(file_mapping.dir)
+    end
+
+    def local(local_path)
+      File.read( __project__.absolute_path(local_path) )
+    end
+
+    def local?(local_path)
+      File.exists?( __project__.absolute_path(local_path) )
     end
 
     def project
