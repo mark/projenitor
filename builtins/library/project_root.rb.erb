@@ -1,3 +1,6 @@
+<% files.each do |file| %>
+require '<%= project %>/<%= file[:filename] %>'<% end %>
+
 class <%= project.classify %>
 
 end
