@@ -1,0 +1,13 @@
+redis:
+  # When running your cinch bot on heroku, you can sign up for a variety
+  # of free redis hosts.  So when you get their credentials, add them to
+  # this file and we'll put them in the right place.
+  host: 'Your redis host'
+  password: 'Your redis password'
+  port: 'Your redis port'
+
+bot:
+  # If you add a nick here, it'll get used as the default nick for your
+  # cinch bot.  If you don't, it'll get generated based on the project
+  # name.
+  nick: ''
